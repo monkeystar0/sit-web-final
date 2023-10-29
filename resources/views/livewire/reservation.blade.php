@@ -6,7 +6,7 @@
     <div class="container" style="margin-top: 80px;">
         <div class="row">
             <div class="col-7">
-                <h2>Please select the date: </h2>
+                <h2>Please select the date <br></h2>
                 <div class="wrapper">
                     <header>
                         <p class="current-date"></p>
@@ -28,6 +28,7 @@
                         <ul class="days"></ul>
                     </div>
                 </div>
+                <br>Note: Our operation hours are Tuesday to Saturday (10:00 - 18:00)
             </div>
             <div class="col-5">
                 <h2>Information</h2>
@@ -56,7 +57,7 @@
                             Name:
                         </div>
                         <div class="col-8">
-                            <input type="text" name="reserveName" wire:model="reserveName" value="">
+                            <input type="text" name="reserveName" wire:model="reserveName">
                         </div>
                         <div class="col-4">
                             Numer of Person:
@@ -72,13 +73,14 @@
                             Telephone Number:
                         </div>
                         <div class="col-8">
-                            <input type="tel" wire:model="title">
+                            <input type="tel" wire:model="customerTel">
+                            <div x-text="$wire.reserveName"></div>
                         </div>
                         <div class="col-4">
                             Email Address:
                         </div>
                         <div class="col-8">
-                            <input type="text" wire:model="title">
+                            <input type="text">
                         </div>
                         <div class="col-4">
                             Note:

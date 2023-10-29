@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\On; 
+use Illuminate\Support\Facades\Log; 
 
 class Reservation extends Component
 {
@@ -14,11 +15,31 @@ class Reservation extends Component
     public $selectedTime = '';
     public $reserveName = 'test';
     public $todo = 'test';
+    public $customerTel = "00";
 
 
     public function render()
     {
+        Log::info('updatedSearchTerm was triggered');
         return view('livewire.reservation');
+    }
+
+    public function updatedSelectedDate()
+    {
+        echo 'test</br>';
+    }
+
+    public function mount()
+{
+    Log::info("Component has been mounted.");
+}
+
+    public function updatedReserveName()
+    {
+        echo 'test</br>';
+        $this->emit('searchTermUpdated', "wohoo");
+        Log::info('updatedSearchTerm was triggered');
+        $this ->customerTel = "123456";
     }
 
     #[On('check-time-slots')] 

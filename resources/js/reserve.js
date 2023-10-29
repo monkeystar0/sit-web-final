@@ -25,9 +25,18 @@ const renderCalendar = () => {
 
     for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
         // adding active class to li if the current day, month, and year matched
+        const mock_cur_date = new Date(currYear, currMonth, i);
         let isToday = i === date.getDate() && currMonth === new Date().getMonth()
             && currYear === new Date().getFullYear() ? "active" : "";
-        liTag += `<li class="date-select ${isToday}">${i}</li>`;
+
+        if (mock_cur_date.getDay() == 0 || mock_cur_date.getDay() == 1){
+            liTag += `<li class="inactive">${i}</li>`;
+        }else{
+            liTag += `<li class="date-select ${isToday}">${i}</li>`;
+        }
+        //console.log(mock_cur_date.getDay());
+        //let close_operation = "";
+    
 
         if (i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear()) {
             selectedDate = i;
@@ -52,6 +61,13 @@ const renderCalendar = () => {
 }
 
 renderCalendar();
+
+document.addEventListener("DOMContentLoaded", () => {
+    Livewire.on('searchTermUpdated', (searchTerm) => {
+        console.log('Search term updated:', searchTerm);
+        // Your additional JavaScript logic here
+    });
+});
 
 const onClickCalendar = (selectedDay) => {
     const dateSelector = document.querySelectorAll(".date-select");
