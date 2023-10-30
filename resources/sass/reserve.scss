@@ -6,13 +6,17 @@
 .main-reserve {
   position: relative;
   background-color: #e7e7e7ba;
-  height: 100vh;
+  height: 100%;
 }
 
 .reserve-header {
   width: 100%;
   text-align: center;
   padding-top: 25px;
+}
+
+.customer-info-input{
+  padding: 5px;
 }
 
 .wrapper {
