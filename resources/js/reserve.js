@@ -1,6 +1,7 @@
 const prevNextIcon = document.querySelectorAll(".icons span");
 var selectedDate = '';
 var selectedMonth = '';
+var selectedYear = "";
 
 // getting new date, current year and month
 let date = new Date(),
@@ -49,9 +50,9 @@ const renderCalendar = () => {
                 document.getElementById("dateDisplay").value = displayDate;
                 document.getElementById("dateDisplay").innerText = displayDate;
                 let currentDate = `${selectedDate}-${currMonth+1}-${currYear}`;
-    
+                
                 document.getElementById("selectedDate").value = currentDate;
-                window.Livewire.dispatch('setInitialSelectedDate', {message: 'New post added.'});
+                window.Livewire.dispatch('setInitialSelectedDate', {message: currentDate});
             }
         }
 
@@ -94,6 +95,7 @@ const onClickCalendar = (selectedDay) => {
             document.getElementById("selectedDate").innerText = currentDate;
             document.getElementById("selectedDate").value = currentDate;
             selectedMonth = currMonth;
+            selectedYear = selectedYear;
         } else {
             icon.classList.remove('active');
         }
@@ -104,7 +106,7 @@ const onClickCalendar = (selectedDay) => {
 prevNextIcon.forEach(icon => { // getting prev and next icons
     icon.addEventListener("click", () => { // adding click event on both icons
         
-        if (icon.id === "prev" && currMonth - 1 < new Date().getMonth()){
+        if (icon.id === "prev" && new Date(currYear, currMonth , 0) < new Date()){
             alert("We do not allow reserve backward in the last month");
             end;
         }
@@ -132,3 +134,18 @@ document.addEventListener('livewire:initialized', () => {
         // }, 3);
     });
 });
+
+const showSmartMenu = () => {
+    const menuPanel = document.getElementById("menuPanel")
+    // current scroll position 
+    var st = document.documentElement.scrollTop;
+    
+    console.log(st);
+    if (st>=525){
+        menuPanel.className = "menuPanel show-menu";
+    }else{
+        menuPanel.className = "menuPanel hide-menu";
+    }
+}
+
+window.addEventListener("scroll", showSmartMenu);

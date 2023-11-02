@@ -15,7 +15,7 @@
         <div class="main-menu">
         <div class="row">
         <div class="col-12">
-            <h2>Menu</h2>
+            <h2><a href="#" wire:click.prevent="goToFoodMenu">Menu</a></h2>
         </div>
         <div class="col-12">
             <h2>Contact us</h2>
