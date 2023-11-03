@@ -10,14 +10,14 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <!-- Scripts -->
     @livewireScripts
-    
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @if(request()->routeIs('reserve'))
-      @vite(['resources/sass/reserve.scss', 'resources/js/reserve.js'])
+        @vite(['resources/sass/reserve.scss', 'resources/js/reserve.js'])
     @endif
     </head>
     <body class="main">
         
         {{ $slot }}
+        
     </body>
 </html>

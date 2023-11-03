@@ -92,11 +92,11 @@
                             @error('customerEmail') <span class="error">This field is required.</span> @enderror
                         </div>
                         <div class="col-4 customer-info-input">
-                            Choosen Menu:
+                            Chosen Menu:
                         </div>
                         <div class="col-8 customer-info-input">
-                            0
-                            <a href="#menu-selecting">>>Choose menu<<</a>
+                            {{$numberOfMenu}} Items
+                            <a href="#menu-selecting"> >>Choose menu<< </a>
                         </div>
                         <div class="col-4 customer-info-input">
                             Note:
@@ -105,11 +105,10 @@
                             <textarea class="form-control" rows="5" cols="33" placeholder="please specify if you have any special request"></textarea>
                         </div>
                         <div class="col-6 customer-info-input">
-                            <button class="book-btn" type="submit">Book</button></br>
+                            <button class="book-btn" wire:confirm="Do you confirm to proceed?" type="submit">Book</button></br>
                         </div>
-                        <!-- <div class="col-12"><br></div> -->
                         <div class="col-6 customer-info-input">
-                            <a class="book-btn" href="#" wire:click.prevent="goBack">Back</a>
+                            <a class="book-btn" href="#" wire:click.prevent="goBack" wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE">Back</a>
                         </div>
                 </form>
             </div>
@@ -119,7 +118,7 @@
 
 <div class="menu-selecting" id="menu-selecting">
     <img src="{{ asset('/images/menu-main-bg.jpeg') }}" class="menu-main-bg">
-    <div class="menuPanel hide-menu" id="menuPanel" wire:ignore>
+    <div class="menuPanel hide-menu" id="menuPanel" wire:ignore.self>
         <div class="menu-list-content">
             <div class="row">
                 <div class="col-12 customer-info-input">
@@ -128,113 +127,101 @@
                 <div class="col-4 customer-info-input">
                     Name:
                 </div>
-                <div class="col-8 customer-info-input">
+                <div class="col-8 customer-info-input text-start">
                     <div x-text="$wire.reserveName"></div>
                 </div>
                 <div class="col-4 customer-info-input">
                     Date:
                 </div>
-                <div class="col-8 customer-info-input">
-                    <h2 x-text="$wire.selectedDate"></h2> at <h2 x-text="$wire.selectedTime"></h2>
+                <div class="col-8 customer-info-input text-start">
+                    <p x-text="$wire.customerInfoDate"></p>
                 </div>
+                <div class="col-12 customer-info-input">
+                    <h3>Menu list:</h3>
+                </div>
+                @foreach ($chosenMenuList as $item)
+                <div class="row">
+                    @php
+                    $display = $item;
+                    echo '<div class="col-6">
+                        <p>'.$display['name'].'</p>
+                    </div>';
+                    echo '<div class="col-2">
+                        <p>x '.$display['qty'].'</p>
+                    </div>';
+                    echo '<div class="col-3">
+                        <p><b>'.$display['price'].' $</b></p>
+                    </div>';
+
+                    @endphp
+                    <div class="col-1">
+                        <p><b>[<a href="javascript:;" wire:click="removeChosenMenu({{$display['id']}})">X</a>]</b></p>
+                    </div>
+                </div>
+                @endforeach
             </div>
 
         </div>
     </div>
     <div class="container menu-main-container" style="margin-top: 80px;">
         <div class="row">
-            <div class="col-12 text-center"><h1>Thai Authentic food menu</h1></div>
-            <div class="col-12"><h3>Entree, Lunch/Dinner, Desserts, Drinks</h3></div>
-            <div class="col-4">
-                <div class="menu-card">
-                    <img class="menu-image" src="https://ucarecdn.com/377cfc3d-ad21-4b57-8449-40aeaf96af67/-/resize/x400/-/format/auto/-/progressive/yes/1-2.jpg">
-                    <div class="menu-name">
-                        Fired rice
-                    </div>
-                    <div class="menu-price">
-                        15.5$
-                    </div>
-                    <div class="menu-detail">
-                        rice tomato
-                    </div>
-                    <button class="add-btn">Add</button>
+            <div class="col-12 text-center">
+                <h1 class="header-menu-selecting">Thai Authentic food menu</h1>
+            </div>
+            <div class="col-12 menu-selecting-menu-bg">
+                <div class="row menu-selecting-menu text-center">
+                    <div class="col-3 menu-selecting-menu-btn">Entree</div>
+                    <div class="col-3 menu-selecting-menu-btn">Lunch/Dinner</div>
+                    <div class="col-3 menu-selecting-menu-btn">Desserts</div>
+                    <div class="col-3 menu-selecting-menu-btn">Drinks</div>
+                    </h3>
                 </div>
             </div>
+            @foreach ( $menuList as $item)
             <div class="col-4">
                 <div class="menu-card">
-                    <img class="menu-image" src="https://www.newzealand.com/assets/Tourism-NZ/Other/1a073e6576/img-1536111724-1882-20357-p-460BE22E-DA4C-C55B-27544EB062B49C2B-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQzMCwzMDAsNTAsNTAsNzUsInBuZyIsNjUsMi41XQ.png">
+                    <img class="menu-image" src="{{$item->image}}">
                     <div class="menu-name">
-                        Fired rice
+                        <strong>{{$item->name}}</strong>
                     </div>
                     <div class="menu-price">
-                        15.5$
+                        {{$item->price}}$
                     </div>
                     <div class="menu-detail">
-                        rice tomato
+                        <br>{{$item->description}}<br><br>
                     </div>
-                    <button>Add</button>
+                    <div class="value-button" id="decrease" onclick='decreaseValue({{ $item->id }})' value="Decrease Value">-</div>
+                    <input type="number" class="qty-select" id="qty-{{ $item->id }}" value="1" disabled />
+                    <div class="value-button" id="increase" onclick="increaseValue({{ $item->id }})" value="Increase Value">+</div><button onClick="addItem({{ $item->id }})" class="add-btn">Add</button>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="menu-card">
-                    <img class="menu-image" src="https://www.newzealand.com/assets/Tourism-NZ/Other/1a073e6576/img-1536111724-1882-20357-p-460BE22E-DA4C-C55B-27544EB062B49C2B-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQzMCwzMDAsNTAsNTAsNzUsInBuZyIsNjUsMi41XQ.png">
-                    <div class="menu-name">
-                        Fired rice
-                    </div>
-                    <div class="menu-price">
-                        15.5$
-                    </div>
-                    <div class="menu-detail">
-                        rice tomato
-                    </div>
-                    <button>Add</button>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="menu-card">
-                    <img class="menu-image" src="https://www.newzealand.com/assets/Tourism-NZ/Other/1a073e6576/img-1536111724-1882-20357-p-460BE22E-DA4C-C55B-27544EB062B49C2B-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQzMCwzMDAsNTAsNTAsNzUsInBuZyIsNjUsMi41XQ.png">
-                    <div class="menu-name">
-                        Fired rice
-                    </div>
-                    <div class="menu-price">
-                        15.5$
-                    </div>
-                    <div class="menu-detail">
-                        rice tomato
-                    </div>
-                    <button>Add</button>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="menu-card">
-                    <img class="menu-image" src="https://www.newzealand.com/assets/Tourism-NZ/Other/1a073e6576/img-1536111724-1882-20357-p-460BE22E-DA4C-C55B-27544EB062B49C2B-2544003__aWxvdmVrZWxseQo_FocalPointCropWzQzMCwzMDAsNTAsNTAsNzUsInBuZyIsNjUsMi41XQ.png">
-                    <div class="menu-name">
-                        Fired rice
-                    </div>
-                    <div class="menu-price">
-                        15.5$
-                    </div>
-                    <div class="menu-detail">
-                        rice tomato
-                    </div>
-                    <button>Add</button>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
 
-<!-- <script>
-    document.addEventListener('livewire:initialized', () => {
-    console.log("ttt");
-    //renderCalendar();
-    Livewire.on('searchTermUpdated', (event) => {
-        console.log(event);
-        $wire.selectedDate = event;
-        // setTimeout(function() {  
-        //     console.log(selectedDate);
-        //     //renderCalendar();
-        // }, 3);
-    });
-});
-</script> -->
+<script>
+    function addItem(id) {
+        var value = parseInt(document.getElementById('qty-' + id).value, 10);
+        window.Livewire.dispatch('add-menu-item', {
+            id: id,
+            qty: value
+        });
+        document.getElementById('qty-' + id).value = 1;
+    }
+
+    const increaseValue = (id) => {
+        var value = parseInt(document.getElementById('qty-' + id).value, 10);
+        value = isNaN(value) ? 1 : value;
+        value++;
+        document.getElementById('qty-' + id).value = value;
+    }
+
+    const decreaseValue = (id) => {
+        var value = parseInt(document.getElementById('qty-' + id).value, 10);
+        value = isNaN(value) ? 0 : value;
+        value <= 2 ? value = 2 : '';
+        value--;
+        document.getElementById('qty-' + id).value = value;
+    }
+</script>

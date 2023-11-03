@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->double('price');
             $table->text('description')->nullable();
+            $table->integer('menu_group');
             $table->timestamps();
         });
     }

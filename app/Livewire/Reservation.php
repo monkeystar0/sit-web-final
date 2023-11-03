@@ -3,61 +3,84 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Livewire\Attributes\On; 
-use Illuminate\Support\Facades\Log; 
-use Livewire\Attributes\Rule; 
+use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\Rule;
 use App\Models\MenuItem;
+use App\Models\ChosenMenu;
+use Illuminate\Support\Collection;
+use stdClass;
 
 class Reservation extends Component
 {
-    public $no_persons = [1,2,3,4,5,6,7,8,9,10];
-    public $available_time_slots = ['09:00','10:00','11:00', '12:00', '13:00'];
-    public $available_time_slots2 = ['11:00','12:00','14:00', '15:00', '16:00'];
-    #[Rule('required')] 
+    public $no_persons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    public $available_time_slots = ['09:00', '10:00', '11:00', '12:00', '13:00'];
+    public $available_time_slots2 = ['11:00', '12:00', '14:00', '15:00', '16:00'];
+    #[Rule('required')]
     public $selectedDate = '';
     #[Rule('required')]
-    public $selectedTime = '-';
-    #[Rule('required')] 
-    public $reserveName = '-';
-    #[Rule('required')] 
+    public $selectedTime = '';
+    #[Rule('required')]
+    public $reserveName = '';
+    #[Rule('required')]
     public $customerTel = "";
-    #[Rule('required')] 
+    #[Rule('required')]
     public $customerEmail = "";
     public $availableSeat = '';
-    public $testModel = [];
+    public $menuList = array();
+    public $customerInfoDate = '';
+    public $chosenMenuList = array();
+    public $numberOfMenu = 0;
 
 
     public function render()
     {
-        //Log::info('updatedSearchTerm was triggered');
+        $this->getCustomerInfoProperty();
+        //Log::info('updatedSearchTerm was rendered');
         return view('livewire.reservation');
     }
 
-    public function mount(){
-        //$this->testModel = array(new Menu('1', 'https://ucarecdn.com/377cfc3d-ad21-4b57-8449-40aeaf96af67/-/resize/x400/-/format/auto/-/progressive/yes/1-2.jpg', 5.99, "Spring vegtable rolls", "Spring vegtable rolls (serve with 6 rolls)"));
+    public function mount()
+    {
+        $this->menuList = MenuItem::all();
     }
     // public function updatedSelectedDate()
     // {
     //     $this->available_time_slots = $this->available_time_slots2;
     // }
 
-    public function submitReservation(){
-        Log::info('updatedSearchTerm was triggered'.json_encode($this->validate()));
+    public function setMenuCounter(){
+        $this->numberOfMenu = count($this->chosenMenuList);
+    }
+
+    public function submitReservation()
+    {
+        //Log::info('updatedSearchTerm was triggered'.json_encode($this->validate()));
         $this->validate();
         config(['front_res.status' => false]);
     }
 
     public function updatedReserveName()
     {
-         $this->dispatch('searchTermUpdated', $this->selectedDate);
-
+        $this->dispatch('searchTermUpdated', $this->selectedDate);
     }
 
     public function updatedSelectedTime()
     {
         $this->availableSeat = 'Avaialable seats: 5';
-         $this->dispatch('searchTermUpdated', 'selected timeee');
+        $this->dispatch('searchTermUpdated', 'selected' . $this->selectedTime);
+    }
 
+    public function getCustomerInfoProperty()
+    {
+        $dateDisplay = date_create($this->selectedDate);
+        $timeDisplay = '';
+        if ($this->selectedTime === '') {
+            $timeDisplay = '-';
+        } else {
+            $timeDisplay = $this->selectedTime;
+        }
+        $this->customerInfoDate = $dateDisplay->format('l jS \o\f F Y') . " at " . $timeDisplay;
     }
 
     public function setSelectedDate($date)
@@ -68,31 +91,65 @@ class Reservation extends Component
         $this->available_time_slots = $this->available_time_slots2;
     }
 
-    #[On('setInitialSelectedDate')] 
+    #[On('setInitialSelectedDate')]
     public function updateInitialDate($message)
     {
         $this->selectedDate = $message;
     }
 
-    public function goBack(){
-        $menuItems = MenuItem::create([
-            'name' => 'Spring vegtables rolls',
-            'description' => 'serve with 6 rolls',
-            'image' => 'https://ucarecdn.com/377cfc3d-ad21-4b57-8449-40aeaf96af67/-/resize/x400/-/format/auto/-/progressive/yes/1-2.jpg',
-            'price' => 3.99
-        ]);
-        $menuItems = MenuItem::create([
-            'name' => 'Golden Prawns (5pcs)',
-            'description' => 'Thai style tempura prawns served with sweet chilli sauce',
-            'image' => 'https://ucarecdn.com/dcc824e8-aafd-49fe-9754-406ced9661e5/-/resize/x400/-/format/auto/-/progressive/yes/9.jpg',
-            'price' => 8.99
-        ]);
-        $menuItems = MenuItem::create([
-            'name' => 'Chicken Satay Skewers (3 sticks)',
-            'description' => 'Marinated chicken sticks served with homemade peanut sauce and sweet vinegar sauce',
-            'price' => 6.99
-        ]);
+    public function goBack()
+    {
         $this->redirect('/');
+    }
+
+    #[On('add-menu-item')]
+    public function addMenuItem($id, $qty)
+    {
+        $result = MenuItem::where('id', $id)->take(1)->get();
+        $itemExisted = collect($this->chosenMenuList)->firstWhere('id', $id);
+        
+        if ($itemExisted !== null && $result !== null) {
+            $itemExisted["qty"] += $qty;
+            $itemExisted["price"] += ($qty * $result[0]->price);
+            $found_key = array_search($id, array_column($this->chosenMenuList, 'id'));
+            if ($found_key !== null) {
+                $this->chosenMenuList["$found_key"] = $itemExisted;
+                // $this->dispatch('searchTermUpdated', $itemExisted);
+                // Log::info('add called add exist:'.$found_key.',qty:'.$qty.json_encode($itemExisted));
+                // Log::info('overall:'.json_encode($this->chosenMenuList));
+            }
+        } else {
+            $mock = new ChosenMenu;
+            $mock->qty = $qty;
+            $mock->id = $id;
+            $mock->name =  $result[0]->name;
+            $mock->price = $qty * $result[0]->price;
+            $this->chosenMenuList[] = collect($mock)->toArray();
+            // $this->dispatch('searchTermUpdated', $mock);
+            // Log::info('add called add new:'.json_encode($mock));
+            // Log::info('add called add new:'.json_encode($this->chosenMenuList));
+        }
+        $this->setMenuCounter();
+
+        // $collection = collect($this->chosenMenuList);
+        // $this->dispatch('searchTermUpdated', $collection->toArray());
+
+        
+    }
+
+    public function removeChosenMenu($id)
+    {
+        $found_key = array_search($id, array_column($this->chosenMenuList, 'id'));
+        $this->dispatch('searchTermUpdated', $found_key);
+        if ($found_key !== null) {
+            if ($found_key == 0){
+                array_splice($this->chosenMenuList, 0, 1);
+            }else{
+                array_splice($this->chosenMenuList, $found_key, $found_key);
+            //    $key = $id-1;
+            //    unset($this->chosenMenuList[$key]);
+            }
+        }
     }
 
     // public function rendered($view, $html)
@@ -104,7 +161,7 @@ class Reservation extends Component
     //     // $html: The final, rendered HTML
     // }
 
-    
+
 
     // public function updating($property, $value)
     // {

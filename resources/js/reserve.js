@@ -81,6 +81,24 @@ const renderCalendar = () => {
     });
 
 }
+// const addBtnSelector = document.querySelectorAll(".add-btn");
+// addBtnSelector.forEach(icon => {
+//     icon.addEventListener("click", () => {
+//         console.log(icon.id);
+//     });
+// });
+
+
+// var increaseValue = (id) => {}
+
+// var decreaseValue = (id) => {}
+
+// document.addEventListener("DOMContentLoaded", (event) => {
+    
+// });
+
+
+
 
 const onClickCalendar = (selectedDay) => {
     const dateSelector = document.querySelectorAll(".date-select");
@@ -139,8 +157,6 @@ const showSmartMenu = () => {
     const menuPanel = document.getElementById("menuPanel")
     // current scroll position 
     var st = document.documentElement.scrollTop;
-    
-    console.log(st);
     if (st>=525){
         menuPanel.className = "menuPanel show-menu";
     }else{
@@ -149,3 +165,4 @@ const showSmartMenu = () => {
 }
 
 window.addEventListener("scroll", showSmartMenu);
+

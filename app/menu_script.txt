@@ -1,0 +1,35 @@
+$menuItems = MenuItem::create([
+            'name' => 'Spring vegtables rolls',
+            'description' => 'serve with 6 rolls',
+            'image' => 'https://ucarecdn.com/377cfc3d-ad21-4b57-8449-40aeaf96af67/-/resize/x400/-/format/auto/-/progressive/yes/1-2.jpg',
+            'price' => 3.99,
+            'menu_group' => 1
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Golden Prawns (5pcs)',
+            'description' => 'Thai style tempura prawns served with sweet chilli sauce',
+            'image' => 'https://ucarecdn.com/dcc824e8-aafd-49fe-9754-406ced9661e5/-/resize/x400/-/format/auto/-/progressive/yes/9.jpg',
+            'price' => 8.99,
+            'menu_group' => 1
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Chicken Satay Skewers (3 sticks)',
+            'description' => 'Marinated chicken sticks served with homemade peanut sauce and sweet vinegar sauce',
+            'image' => 'https://ucarecdn.com/91cd0e20-5adc-4e89-bdf1-bbef77a057a5/-/resize/x400/-/format/auto/-/progressive/yes/7.jpg',
+            'price' => 6.99,
+            'menu_group' => 1
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Fish Cakes 4pcs',
+            'description' => 'Finely Minced fish, blend with curry paste served with sweet chilli',
+            'image' => 'https://ucarecdn.com/888590d1-79d8-4144-912e-2402fe8f02b3/-/resize/x400/-/format/auto/-/progressive/yes/6.jpg',
+            'price' => 6.99,
+            'menu_group' => 1
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Fried Tofu 6pcs',
+            'description' => 'Deep Fried homemade tofu served with sweet chilli sauce',
+            'image' => 'https://ucarecdn.com/bff4f833-93eb-4347-aedf-60313e95be1b/-/resize/x400/-/format/auto/-/progressive/yes/2.jpg',
+            'price' => 5.99,
+            'menu_group' => 1
+        ]);
