@@ -56,7 +56,6 @@
                             <div>
                                 @error('selectedTime') <span class="error">This field is required.</span> @enderror
                             </div>
-                            <div x-text="$wire.availableSeat"></div>
                         </div>
                         <div class="col-4 customer-info-input">
                             Name:
@@ -71,7 +70,7 @@
                             Numer of Person:
                         </div>
                         <div class="col-8 customer-info-input">
-                            <select name="numberOfPerson" id="numberOfPerson" class="form-control">
+                            <select name="numberOfPerson" wire:model="selectedNoPerson" id="numberOfPerson" class="form-control">
                                 @foreach ($no_persons as $val)
                                 <option value="{{$val}}">{{$val}}</option>
                                 @endforeach
@@ -88,7 +87,7 @@
                             Email Address:
                         </div>
                         <div class="col-8 customer-info-input">
-                            <input type="text" class="form-control" wire:model.live="customerEmail">
+                            <input type="email" class="form-control" wire:model.live="customerEmail">
                             @error('customerEmail') <span class="error">This field is required.</span> @enderror
                         </div>
                         <div class="col-4 customer-info-input">
@@ -97,12 +96,35 @@
                         <div class="col-8 customer-info-input">
                             {{$numberOfMenu}} Items
                             <a href="#menu-selecting"> >>Choose menu<< </a>
+                            @foreach ($chosenMenuList as $item)
+                            <div class="row">
+                                @php
+                                $display = $item;
+                                echo '<div class="col-6">
+                                    <p>'.$display['name'].'</p>
+                                </div>';
+                                echo '<div class="col-2">
+                                    <p>x '.$display['qty'].'</p>
+                                </div>';
+                                echo '<div class="col-3">
+                                    <p><b>'.$display['price'].' $</b></p>
+                                </div>';
+
+                                @endphp
+                                <div class="col-1">
+                                    <p><b>[<a href="javascript:;" wire:click="removeChosenMenu({{$display['id']}})">X</a>]</b></p>
+                                </div>
+                            </div>
+                            @endforeach
+                            <div class="col-12 customer-info-input text-end">
+                                <b>Total: {{$totalToPay}} $</b>
+                            </div>
                         </div>
                         <div class="col-4 customer-info-input">
                             Note:
                         </div>
                         <div class="col-8 customer-info-input">
-                            <textarea class="form-control" rows="5" cols="33" placeholder="please specify if you have any special request"></textarea>
+                            <textarea class="form-control" rows="5" wire:model="customerNote" cols="33" placeholder="please specify if you have any special request"></textarea>
                         </div>
                         <div class="col-6 customer-info-input">
                             <button class="book-btn" wire:confirm="Do you confirm to proceed?" type="submit">Book</button></br>
@@ -139,6 +161,7 @@
                 <div class="col-12 customer-info-input">
                     <h3>Menu list:</h3>
                 </div>
+                <div class="chosen-menu-list-scrollable">
                 @foreach ($chosenMenuList as $item)
                 <div class="row">
                     @php
@@ -155,13 +178,27 @@
 
                     @endphp
                     <div class="col-1">
-                        <p><b>[<a href="javascript:;" wire:click="removeChosenMenu({{$display['id']}})">X</a>]</b></p>
+                        <p><b><a href="javascript:;" wire:click="removeChosenMenu({{$display['id']}})" style="color:red;">X</a></b></p>
                     </div>
                 </div>
                 @endforeach
+                </div>
             </div>
-
+            
         </div>
+        <div class="menuPanel-bottom">
+            <div class="row">
+                <div class="col-3 customer-info-input">
+                <a class="book-btn" href="#calendarDays">Book</a>
+                </div>
+                <div class="col-3 customer-info-input">
+                    <button class="add-btn" wire:click="clearAllChosenMenu" style="height: 100%;">Clear</button></br>
+                </div>
+                <div class="col-6 customer-info-input text-center">
+                    <b>Total: {{$totalToPay}} $</b>
+                </div>
+            </div>
+            </div>
     </div>
     <div class="container menu-main-container" style="margin-top: 80px;">
         <div class="row">
@@ -170,10 +207,10 @@
             </div>
             <div class="col-12 menu-selecting-menu-bg">
                 <div class="row menu-selecting-menu text-center">
-                    <div class="col-3 menu-selecting-menu-btn">Entree</div>
-                    <div class="col-3 menu-selecting-menu-btn">Lunch/Dinner</div>
-                    <div class="col-3 menu-selecting-menu-btn">Desserts</div>
-                    <div class="col-3 menu-selecting-menu-btn">Drinks</div>
+                    <div class="col-3 menu-selecting-menu-btn" wire:click="setCurrentMenu(1)">Entree</div>
+                    <div class="col-3 menu-selecting-menu-btn" wire:click="setCurrentMenu(2)">Lunch/Dinner</div>
+                    <div class="col-3 menu-selecting-menu-btn" wire:click="setCurrentMenu(3)">Desserts</div>
+                    <div class="col-3 menu-selecting-menu-btn" wire:click="setCurrentMenu(4)">Drinks</div>
                     </h3>
                 </div>
             </div>
@@ -190,9 +227,12 @@
                     <div class="menu-detail">
                         <br>{{$item->description}}<br><br>
                     </div>
+                    <div class="row">
+                    <div class="col-7">
                     <div class="value-button" id="decrease" onclick='decreaseValue({{ $item->id }})' value="Decrease Value">-</div>
                     <input type="number" class="qty-select" id="qty-{{ $item->id }}" value="1" disabled />
-                    <div class="value-button" id="increase" onclick="increaseValue({{ $item->id }})" value="Increase Value">+</div><button onClick="addItem({{ $item->id }})" class="add-btn">Add</button>
+                    <div class="value-button" id="increase" onclick="increaseValue({{ $item->id }})" value="Increase Value">+</div></div><div class="col-5"><button onClick="addItem({{ $item->id }})" class="add-btn">Add</button></div>
+                    </div>
                 </div>
             </div>
             @endforeach

@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class MenuItem extends Model
 {
     use HasFactory;
-    protected $attributes = [
-        'attribute_name' => 'default value',
-        // Other default attribute values
-    ];
+    // protected $attributes = [
+    //     'attribute_name' => 'default value',
+    //     // Other default attribute values
+    // ];
     protected $table = 'menu_items';
 
     protected $primaryKey = 'id';

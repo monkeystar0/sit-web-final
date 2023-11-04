@@ -33,3 +33,146 @@ $menuItems = MenuItem::create([
             'price' => 5.99,
             'menu_group' => 1
         ]);
+
+        $menuItems = MenuItem::create([
+            'name' => 'Tom Yum Red Soup',
+            'description' => 'A famous tom yum soup with a creamy base with your choice of meat, red onion, tomato, mushroom and herbs',
+            'image' => 'https://ucarecdn.com/2917af39-a91f-4b6e-9835-12509d2a5e0b/-/crop/897x843/22,18/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/11.JPG',
+            'price' => 19.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Tom Kha Soup',
+            'description' => 'Light creamy coconut soup with Thai herbs, lemon juice, tomato, mushroom and your choice of meat',
+            'image' => 'https://ucarecdn.com/1a61ff80-b8fb-4fc3-b274-743b1128c89d/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/12.jpg',
+            'price' => 18.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Som Tum Thai',
+            'description' => 'A famous Thai salad with carrot, green beans, tomatoes, cashew nut, fish sauce and lemon juice',
+            'image' => 'https://ucarecdn.com/5e5e55b8-fc28-4bd8-9907-457f7a0eb6f4/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/16.jpg',
+            'price' => 11.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Thai Green Curry',
+            'description' => 'Our famous green curry in coconut milk with your choice of meat, fresh vegetables and aromatic flavors',
+            'image' => 'https://ucarecdn.com/c04403e8-734e-4596-9e08-c6cd65352833/-/crop/938x890/0,58/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/17.jpg',
+            'price' => 18.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Thai Red Curry',
+            'description' => 'A smooth red curry in coconut milk with your choice of meat and fresh vegetables',
+            'image' => 'https://ucarecdn.com/bf3631b6-b120-48de-867a-70fee9df59f7/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/18.jpg',
+            'price' => 18.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Cashews Nuts Stir Fry',
+            'description' => 'Stir fried fresh vegetables, cashew nuts and your choice of meat',
+            'image' => 'https://ucarecdn.com/cdac1bcc-2b86-48ed-9160-93c8206aa747/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/22.jpg',
+            'price' => 16.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Basil Stir Fry',
+            'description' => 'meat stir fried with green bean, capsicum, baby corn, bamboo, basils',
+            'image' => 'https://ucarecdn.com/9ebe6743-3693-4f13-b172-d3e02cd289cb/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/24.jpg',
+            'price' => 18.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Mixed Vegetables Stir fry',
+            'description' => 'Stir fried mix seasonal vegetables, mushroom with special blend of oyster sauce and your choice of meat',
+            'image' => 'https://ucarecdn.com/2b115be8-1b78-473a-abd1-9577c0be1a6e/-/resize/x400/-/format/auto/-/progressive/yes/26.jpg',
+            'price' => 18.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Sizzling Angry Beef',
+            'description' => 'A tasty, stir fried beef with fresh chilli, capsicum, spring onion and beans on hot plate',
+            'image' => 'https://ucarecdn.com/824da59c-4e1f-408a-8fe0-44c8fbb75bad/-/crop/1606x994/170,94/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/29.jpg',
+            'price' => 21.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Chilli sauce with Fish',
+            'description' => 'Deep-fried fish fillets topped with our special chilli sauce',
+            'image' => 'https://ucarecdn.com/8ba95a25-22b8-4839-a0df-2c9c7abdab5c/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/34.JPG',
+            'price' => 22.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Thai Fried Rice',
+            'description' => 'Thai style fried rice with egg, onion and fresh vegetables and your choice of meat',
+            'image' => 'https://ucarecdn.com/de6dc5cd-55ed-4ce6-9483-191f3d4c651f/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/35.jpg',
+            'price' => 16.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Pineapple Fried Rice',
+            'description' => 'Thai style fried rice chicken, pine apple, curry powder, egg and cashew nut',
+            'image' => 'https://ucarecdn.com/9d1d7c8a-f820-4360-89bb-5358f7692c2e/-/crop/1602x915/57,48/-/preview/-/enhance/100//-/resize/x400/-/format/auto/-/progressive/yes/36.jpg',
+            'price' => 18.99,
+            'menu_group' => 2
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Steamed Jasmine Rice',
+            'description' => 'Steamed Jasmine Rice',
+            'image' => 'https://eatwithclarity.com/wp-content/uploads/2021/02/instant-pot-jasmine-rice-4-500x375.jpg',
+            'price' => 2.99,
+            'menu_group' => 2
+        ]);
+
+         $menuItems = MenuItem::create([
+            'name' => 'Lord Chong Thai',
+            'description' => 'Soft jelly with sweet coconut cream',
+            'image' => 'https://img.freepik.com/premium-photo/lod-chong-thai-dessert-lod-chong-with-coconut-milk-wooden-floor_74656-1324.jpg',
+            'price' => 6.99,
+            'menu_group' => 3
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Sticky rice with mango',
+            'description' => 'Sticky rice serve and coconut cream with ripe mango',
+            'image' => 'https://assets-jpcust.jwpsrv.com/thumbnails/urggyl5l-720.jpg',
+            'price' => 9.99,
+            'menu_group' => 3
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Bua Loy',
+            'description' => 'Sticky rice balls in coconut milk, so creamy and so irresistibly sweet',
+            'image' => 'https://www.tastingtable.com/img/gallery/bua-loy-the-floating-thai-dessert-you-should-know/intro-1661228311.jpg',
+            'price' => 6.99,
+            'menu_group' => 3
+        ]);
+
+        $menuItems = MenuItem::create([
+            'name' => 'Coke 330ml',
+            'description' => '-',
+            'image' => 'https://assets.superliquor.co.nz/thumbs/0005505.jpeg',
+            'price' => 3.99,
+            'menu_group' => 4
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'L&P 330ml',
+            'description' => '',
+            'image' => 'https://nzliquor.online/cdn/shop/products/L_P330mlcan_grande.jpg?v=1652695725',
+            'price' => 3.99,
+            'menu_group' => 4
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Sprite 330ml',
+            'description' => '',
+            'image' => 'https://assets.superliquor.co.nz/thumbs/0005546.jpeg',
+            'price' => 3.99,
+            'menu_group' => 4
+        ]);
+        $menuItems = MenuItem::create([
+            'name' => 'Kiwi Blue Water Bottle 600ml',
+            'description' => '',
+            'image' => 'https://www.torpedo7.co.nz/images/products/K3WAW22KBXX_zoom---water-bottle-600ml.jpg?v=aa77a17c552c46c79ddb',
+            'price' => 2.99,
+            'menu_group' => 4
+        ]);

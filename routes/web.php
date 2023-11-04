@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Homepage;
 use App\Livewire\Reservation;
+use App\Livewire\ReservationConfirm;
 use App\Livewire\Todo;
 
 /*
@@ -28,6 +29,9 @@ Route::get('/homepage', Homepage::class)->name('home');
 Route::get('/reserve', Reservation::class)->name('reserve');
 
 Route::get('/todo', Todo::class)->name('todo');
+
+Route::get('/reserve-confirm', ReservationConfirm::class)->name('reserve-confirm');
+
 
 Auth::routes();
 

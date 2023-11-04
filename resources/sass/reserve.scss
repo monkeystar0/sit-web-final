@@ -197,7 +197,7 @@ header .current-date {
 }
 .menu-selecting-menu-btn{
   cursor: pointer;
-  transition: all 0.5s;
+  transition: all 0.2s;
 }
 
 .menu-selecting-menu-btn:hover{
@@ -236,8 +236,16 @@ header .current-date {
 }
 
 .menu-list-content{
+  position:relative;
   margin-top: 25px;
   text-align: center;
+}
+
+.menuPanel-bottom{
+  padding: 15px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
 }
 
 .menu-main-bg{
@@ -257,9 +265,9 @@ header .current-date {
   font-weight: 600;
   white-space: pre;
   padding: 0px 14px;
-  margin-left: 50px;
   font-size: 16px;
   height: 38px;
+  width: 100%;
   line-height: 38px;
   color: rgb(253, 5, 10);
   border: 1px solid rgb(253, 5, 10);
@@ -277,6 +285,7 @@ header .current-date {
   font-family: cursive;
   font-weight: bolder;
 }
+
 
 
 .value-button {
@@ -325,8 +334,7 @@ header .current-date {
   height: 40px;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.chosen-menu-list-scrollable{
+  height: 300px;
+  overflow-y: auto;
 }
