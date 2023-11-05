@@ -12,12 +12,12 @@ use App\Models\ChosenMenu;
 use App\Models\ReservationMenuItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use Carbon\Carbon;
 
 class Reservation extends Component
 {
     public $no_persons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    public $available_time_slots = ['09:00', '10:00', '11:00', '12:00', '13:00'];
-    public $available_time_slots2 = ['11:00', '12:00', '14:00', '15:00', '16:00'];
+    public $available_time_slots = [];
     #[Rule('required')]
     public $selectedDate = '';
     #[Rule('required')]
@@ -47,6 +47,7 @@ class Reservation extends Component
     public function mount()
     {
         $this->menuList = MenuItem::where('menu_group', $this->currentMenuCat)->get();
+        
     }
     // public function updatedSelectedDate()
     // {
@@ -98,7 +99,8 @@ class Reservation extends Component
 
             // Commit the transaction
             DB::commit();
-            Log::info('updatedSearchTerm was triggered' . json_encode($reservation));
+            //Log::info('updatedSearchTerm was triggered' . json_encode($reservation));
+            $this->redirect(route('reserve-confirm',['reservation_id'=>$reservation->id]));
         } catch (\Exception $e) {
             // An error occurred; cancel the transaction
             DB::rollback();
@@ -142,9 +144,9 @@ class Reservation extends Component
     public function setSelectedDate($date)
     {
         $this->selectedDate = $date;
-        $this->dispatch('searchTermUpdated', $this->selectedDate);
+        //$this->dispatch('searchTermUpdated', $this->selectedDate);
         //check available time slot
-        $this->available_time_slots = $this->available_time_slots2;
+        $this->available_time_slots = $this->generateTimeSlots($date);
     }
 
     #[On('setInitialSelectedDate')]
@@ -209,6 +211,30 @@ class Reservation extends Component
     {
         $this->chosenMenuList = array();
         $this->setMenuCounter();
+    }
+
+    function generateTimeSlots($date) {
+        $slots = [];
+    $operationStartHour = 10; // 10 AM
+    $operationEndHour = 18; // 6 PM, last booking at 5 PM
+    $currentDateTime = Carbon::now('Pacific/Auckland');
+    //Log::info('overall:'.$date);
+    $selectedDate = Carbon::createFromFormat('Y-m-d', $date);
+
+    // Check if the selected date is in the future or today
+    if ($selectedDate->isToday() || $selectedDate->isFuture()) {
+        // If the selected date is today and current time is after operation start, adjust the start hour
+        if ($selectedDate->isToday() && $currentDateTime->hour >= $operationStartHour) {
+            $operationStartHour = $currentDateTime->hour < ($operationEndHour - 1) ? $currentDateTime->hour + 1 : $operationEndHour;
+        }
+
+        // Generate time slots
+        for ($hour = $operationStartHour; $hour < $operationEndHour; $hour++) {
+            $slots[] = str_pad($hour, 2, '0', STR_PAD_LEFT) . ':00';
+        }
+    }
+
+    return $slots;
     }
 
     // public function rendered($view, $html)

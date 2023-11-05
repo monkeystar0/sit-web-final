@@ -1,0 +1,108 @@
+.management-main {
+    margin-top: 50px;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 10px;
+    /* Add padding and other styles as needed */
+}
+
+.card {
+    position: relative;
+    min-width: 300px;
+    max-width: 300px;
+    /* Adjust the width as needed */
+    flex-shrink: 0;
+    /* Prevents the card from shrinking */
+    margin-right: 20px;
+    /* Spacing between cards */
+
+    /* Styles to match the card layout in the image */
+    border: 1px solid #ccc;
+    /* Example border */
+    border-radius: 8px;
+    /* Rounded corners */
+    background-color: white;
+    /* Card background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Box shadow for depth */
+    padding: 20px;
+    /* Padding inside the card */
+
+    /* The height of the card, adjust as necessary */
+    min-height: 200px;
+    /* Example height */
+    font-family: sans-serif;
+}
+
+.card-header{
+    position:absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgb(255, 180, 19);
+    font-size: medium;
+    color: rgb(105, 20, 185);
+
+}
+.card-header.pending{
+    background-color: rgb(255, 180, 19);
+    color: rgb(105, 20, 185);
+
+}
+.card-header.confirmed{
+    background-color: rgb(59 236 0);
+    color: rgb(74 76 204);
+}
+
+.card-header.cencelled{
+    background-color: rgb(253, 19, 19);
+    color: rgb(173, 245, 255);
+
+}
+
+
+.btn-action {
+    padding: 5px;
+}
+
+/* This will make the last card have no margin on the right for a cleaner look */
+.card:last-child {
+    margin-right: 0;
+}
+
+/* If you want to ensure text does not overflow your cards */
+.card-content {
+    margin-top: 30px;
+
+}
+
+.popup-box {
+    position: fixed;
+    /* or 'absolute' if you want it to be positioned relative to its closest positioned ancestor */
+    z-index: 1000;
+    /* High z-index to ensure it's on top of other content */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* Centers the popup */
+    display: none;
+    /* Initially don't display the popup */
+    /* Ensure it's above other items */
+
+    /* Style your popup box */
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the detail button */
+.detail-btn {
+    /* Your button styles here */
+    cursor: pointer;
+}

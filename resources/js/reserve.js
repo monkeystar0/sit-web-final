@@ -49,7 +49,7 @@ const renderCalendar = () => {
                 const displayDate = new Date(currYear, currMonth, selectedDate).toDateString();
                 document.getElementById("dateDisplay").value = displayDate;
                 document.getElementById("dateDisplay").innerText = displayDate;
-                let currentDate = `${selectedDate}-${currMonth+1}-${currYear}`;
+                let currentDate = `${currYear}-${currMonth+1}-${selectedDate}`;
                 
                 document.getElementById("selectedDate").value = currentDate;
                 window.Livewire.dispatch('setInitialSelectedDate', {message: currentDate});
@@ -59,7 +59,7 @@ const renderCalendar = () => {
         if (mock_cur_date.getDay() == 0 ) {
             liTag += `<li class="inactive">${i}</li>`;
         } else {
-            let currentDate = `${i}-${currMonth+1}-${currYear}`;
+            let currentDate = `${currYear}-${currMonth+1}-${i}`;
             liTag += `<li class="date-select ${isToday}" wire:click="setSelectedDate('${currentDate}')">${i}</li>`;
         }
     }

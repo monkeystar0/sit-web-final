@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-// Bootstrap
-@import 'bootstrap/scss/bootstrap';
-
 .main-reserve {
   position: relative;
   background-color: #e7e7e7ba;
@@ -133,8 +130,25 @@ header .current-date {
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
-  color: #2d08ff;
-  background-color: #a2e8ff;
+  color: #e6e2ff;
+  background-color: #0ab33d;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.3s;
+  width: 100%;
+  font-weight: bolder;
+  font-family: sans-serif;
+  border: 1px solid #0d0d0d;
+  transition: color 0.2s;
+  box-shadow: 2px 2px 2px #878787;
+}
+.back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #000000;
+  background-color: #ff5d5d;
   border-radius: 6px;
   outline: none;
   transition: 0.3s;
@@ -143,10 +157,11 @@ header .current-date {
   font-family: sans-serif;
   border: 1px solid #0d0d0d;
   transition: color 1s;
+  box-shadow: 2px 2px 2px #878787;
 }
 
 .book-btn:hover{
-  background-color: #65d8fe;
+  background-color: #00aa22;
 }
 
 .error{

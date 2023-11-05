@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Homepage;
 use App\Livewire\Reservation;
 use App\Livewire\ReservationConfirm;
+use App\Livewire\Management;
 use App\Livewire\Todo;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +26,16 @@ use App\Livewire\Todo;
 
 Route::get('/', Homepage::class)->name('home');
 
- 
+
 Route::get('/homepage', Homepage::class)->name('home');
 
 Route::get('/reserve', Reservation::class)->name('reserve');
 
 Route::get('/todo', Todo::class)->name('todo');
 
-Route::get('/reserve-confirm', ReservationConfirm::class)->name('reserve-confirm');
+Route::get('/reserve-confirm/{reservation_id}', ReservationConfirm::class)->name('reserve-confirm');
 
+Route::get('/management', Management::class)->name('management')->middleware('auth');
 
 Auth::routes();
 

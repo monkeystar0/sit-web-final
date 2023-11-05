@@ -12,6 +12,7 @@ class ReservationMenuItem extends Model
 
     protected $table = 'reservation_menu_items';
     protected $primaryKey = 'id';
+    protected $foreignKey = 'reservation_id';
 
     public $incrementing = true;
     protected $fillable = [
@@ -20,7 +21,7 @@ class ReservationMenuItem extends Model
 
     public function reservation()
     {
-        return $this->belongsTo(ReservationItem::class, 'reservation_id');
+        return $this->belongsTo(ReservationItem::class);
     }
     
 }

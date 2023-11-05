@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+.reserve-confirm-main {
+  position: relative;
+  background-color: #000000ba;
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+}
+
+.reserve-confirm-card{
+  width: 50%;
+  padding: 15px;
+  height: fit-content;
+  border-radius: 25px;
+  box-shadow: 2px 5px 5px #ffbc48;
+  background-color: whitesmoke;
+  position: absolute;
+  left: 25%;
+  top: 40px;
+}
+
+
+
+.reserve-header{
+  font-size: 50px;
+  font-weight: bolder;
+  color: #33c719;
+}
+
+.reserve-status{
+  padding: 5px;
+}
+
+.reserve-status.PENDING{
+  color: #ffa412;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #2d08ff;
+  background-color: #a2e8ff;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.3s;
+  width: 50%;
+  font-weight: bolder;
+  font-family: sans-serif;
+  border: 1px solid #0d0d0d;
+  transition: color 0.2s;
+  box-shadow: 2px 2px 2px #878787;
+}
+
+.back-btn:hover{
+  background-color: #65d8fe;
+}

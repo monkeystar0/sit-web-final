@@ -47,7 +47,7 @@
                             Time:
                         </div>
                         <div class="col-8 customer-info-input">
-                            <select class="form-control" wire:model.live="selectedTime">
+                            <select class="form-control" id="selectedTime" wire:model.live="selectedTime">
                                 <option value="">select time</option>
                                 @foreach ($available_time_slots as $time_slot)
                                 <option value="{{$time_slot}}">{{$time_slot}}</option>
@@ -130,7 +130,7 @@
                             <button class="book-btn" wire:confirm="Do you confirm to proceed?" type="submit">Book</button></br>
                         </div>
                         <div class="col-6 customer-info-input">
-                            <a class="book-btn" href="#" wire:click.prevent="goBack" wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE">Back</a>
+                            <a class="back-btn" href="#" wire:click.prevent="goBack" wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE">Back</a>
                         </div>
                 </form>
             </div>
