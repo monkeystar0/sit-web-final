@@ -8,6 +8,7 @@ use App\Models\ReservationItem;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\MailSenderController;
 use DateTimeZone;
 
 class Management extends Component
@@ -67,6 +68,9 @@ class Management extends Component
     #[On('confirmReserve')]
     public function confirmReserveProcess($id)
     {
+        $sender = new MailSenderController;
+        $sender->sendMail($id);
+        
         ReservationItem::where('id', $id)
             ->update(['status' => '2']);
         $this->mount();

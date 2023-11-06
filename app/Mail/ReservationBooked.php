@@ -9,17 +9,28 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\ReservationItem;
 
 class ReservationBooked extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $statusDisplay = ["","PENDING","CONFIRMED","CANCELED"];
+    public $menuList = [];
+    public $totalToPay = 0.0;
     /**
      * Create a new message instance.
      */
-    public function __construct()
-    {
-        //
+    public function __construct(
+        public ReservationItem $reservationItem,
+    ) {
+        $this->menuList = $reservationItem->menuItems;
+        $this->totalToPay = collect($this->menuList)->sum('price');
+
+    }
+
+    public function backHome(){
+        $this->redirect('/');
     }
 
     /**
@@ -39,7 +50,7 @@ class ReservationBooked extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.emails.reservation',
+            view: 'emails.reservation',
         );
     }
 
