@@ -31,9 +31,13 @@ const renderCalendar = () => {
 
         var isToday = '';
         if (selectedMonth != ''){
-            isToday = i === selectedDate && selectedMonth === currMonth &&
+            let selectedDateCom = parseInt(selectedDate);
+            isToday = i === selectedDateCom && selectedMonth === currMonth &&
             currYear === new Date().getFullYear() ? "active" : "";
-            if (i === selectedDate && currMonth === selectedMonth && currYear === new Date().getFullYear() && mock_cur_date.getDay() != 0) {
+            if (i === selectedDateCom && currMonth === selectedMonth && currYear === new Date().getFullYear() && mock_cur_date.getDay() != 0) {
+                if (i<10) {
+                    selectedDate = '0'+i;
+                }
                 const displayDate = new Date(currYear, currMonth, selectedDate).toDateString();
                 document.getElementById("dateDisplay").value = displayDate;
                 document.getElementById("dateDisplay").innerText = displayDate;
@@ -45,7 +49,12 @@ const renderCalendar = () => {
             currYear === new Date().getFullYear() ? "active" : "";
 
             if (i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear() && mock_cur_date.getDay() != 0) {
-                selectedDate = i;
+                if (i<10) {
+                    selectedDate = '0'+i;
+                }else{
+                    selectedDate = i;
+                }
+
                 const displayDate = new Date(currYear, currMonth, selectedDate).toDateString();
                 document.getElementById("dateDisplay").value = displayDate;
                 document.getElementById("dateDisplay").innerText = displayDate;
@@ -59,7 +68,13 @@ const renderCalendar = () => {
         if (mock_cur_date.getDay() == 0 ) {
             liTag += `<li class="inactive">${i}</li>`;
         } else {
-            let currentDate = `${currYear}-${currMonth+1}-${i}`;
+            var dayOfMonth = '';
+                if (i<10) {
+                    dayOfMonth = '0'+i;
+                }else{
+                    dayOfMonth = i;
+                }
+            let currentDate = `${currYear}-${currMonth+1}-${dayOfMonth}`;
             liTag += `<li class="date-select ${isToday}" wire:click="setSelectedDate('${currentDate}')">${i}</li>`;
         }
     }
@@ -106,10 +121,14 @@ const onClickCalendar = (selectedDay) => {
         const dayOfMonth = parseInt(icon.innerText);
         if (dayOfMonth == selectedDay) {
             icon.classList.add('active');
-            selectedDate = dayOfMonth;
+            if (dayOfMonth<10){
+                selectedDate = "0"+dayOfMonth;
+            }else{
+                selectedDate = dayOfMonth;
+            }
             const displayDate = new Date(currYear, currMonth, selectedDay).toDateString();
             document.getElementById("dateDisplay").value = displayDate;
-            let currentDate = `${selectedDay}-${currMonth+1}-${currYear}`;
+            let currentDate = `${selectedDate}-${currMonth+1}-${currYear}`;
             document.getElementById("selectedDate").innerText = currentDate;
             document.getElementById("selectedDate").value = currentDate;
             selectedMonth = currMonth;

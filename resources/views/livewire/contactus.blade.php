@@ -1,9 +1,17 @@
 <div>
-    <div class="fadebg" id="main_div">
-        <div class="video-content">
-            <video autoplay loop muted>
-                <source src="{{ asset('/video/th_food_bg.mp4') }}" type="video/mp4">
-            </video>
+    <div class="contact-bg" id="main_div">
+        
+        <div class="contact-card">
+            <div class="row">
+            <div class="col-12 text-center"><h1>Contact information</h1><br><br></div>
+            <div class="col-4"><h2>Address:</h2></div>
+            <div class="col-8"><h3>121 Tay Street, Invercargill 9810</h3></div>
+            <div class="col-4"><h2>Telephone number: </h2></div>
+            <div class="col-8"><h3>088-7634958</h3></div>
+            <div class="col-4"><h2>Email Address: </h2></div>
+            <div class="col-8"><h3>2022007599@student.sit.ac.nz</h3></div>
+
+            </div>
         </div>
     </div>
     <div class="second-section" id="second-section">

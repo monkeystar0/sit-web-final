@@ -5,6 +5,7 @@ use App\Livewire\Homepage;
 use App\Livewire\Reservation;
 use App\Livewire\ReservationConfirm;
 use App\Livewire\Management;
+use App\Livewire\Contactus;
 use App\Livewire\Todo;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,7 @@ Route::get('/', Homepage::class)->name('home');
 
 
 Route::get('/homepage', Homepage::class)->name('home');
+Route::get('/contact', Contactus::class)->name('contact');
 
 Route::get('/reserve', Reservation::class)->name('reserve');
 
