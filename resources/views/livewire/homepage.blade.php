@@ -13,22 +13,26 @@
             </div>
         </div>
         <div class="main-menu">
-        <div class="row">
-        <div class="col-12 main-menu-item">
-            <h1><a href="javascript;" wire:click.prevent="goToFoodMenu">Menu</a></h1>
-        </div>
-        <div class="col-12 main-menu-item">
-            <h1><a href="javascript;" wire:click.prevent="contactus">Contact us</a></h1>
-        </div>
-            <div class="col-12">
-                <a class="book-btn" href="" wire:click.prevent="reserve">Book Online Now!</a>
+            <div class="row">
+                <div class="col-12 main-menu-item">
+                    <h1><a href="javascript;" wire:click.prevent="goToFoodMenu">Menu</a></h1>
+                </div>
+                <div class="col-12 main-menu-item">
+                    <h1><a href="javascript;" wire:click.prevent="contactus">Contact us</a></h1>
+                </div>
+                <div class="col-12" style="margin-top: 20px;">
+                    <a class="book-btn" href="" wire:click.prevent="reserve">Book Online Now!</a>
+                </div>
             </div>
-        </div>
         </div>
         <div class="res-status">
             <div class="row">
-                <div class="col-8" style="text-align:end;"><h2>Operating status:</h2></div>
-                <div class="col-4"><h2 class="{{$res_status_css}}" x-text="$wire.res_status_text"></h2></div>
+                <div class="col-8" style="text-align:end;">
+                    <h2>Operating status:</h2>
+                </div>
+                <div class="col-4">
+                    <h2 class="{{$res_status_css}}" x-text="$wire.res_status_text"></h2>
+                </div>
             </div>
         </div>
     </div>

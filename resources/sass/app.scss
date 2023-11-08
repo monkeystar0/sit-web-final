@@ -32,7 +32,7 @@
 
 .contact-bg{
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   width: 100%;
   height: 100vh;
   align-items: center;
@@ -77,11 +77,18 @@ li a{
 
 .main-menu-item{
   padding: 10px;
+  background-color: #000;
+  transition: all 0.2s;
+}
+
+.main-menu-item:hover{
+  background-color: #f8f82f;
 }
 
 .welcome-header{
     opacity: 1.0;
     text-align: center;
+    cursor: pointer;
 }
 
 .second-section{

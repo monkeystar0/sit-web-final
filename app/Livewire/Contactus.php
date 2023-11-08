@@ -35,6 +35,10 @@ class Contactus extends Component
         redirect()->to('/contact');
     }
 
+    public function goToHome(){
+        redirect()->to('/');
+    }
+
     public function goToFoodMenu(){
         redirect()->to('/reserve#menu-selecting');
     }
